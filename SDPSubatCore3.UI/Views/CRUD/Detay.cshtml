@@ -1,0 +1,29 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">@Model.ProductName</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Fiyat: @Model.UnitPrice</p>
+                    @if (Model.CategoryID == 1)
+                    {
+                        <p class="card-text">Kategori: Sebze</p>
+                    }
+                    else if (Model.CategoryID == 2)
+                    {
+                        <p class="card-text">Kategori: Meyve</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">Kategori: Diğer</p>
+                    }
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="@Url.Action("Index", "CRUD")" class="btn btn-primary">Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

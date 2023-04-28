@@ -1,0 +1,24 @@
+﻿@model Product
+
+<form asp-action="VeriyiDuzenle" asp-controller="CRUD" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="@Model.ProductID" />
+
+    <div class="mb-3">
+        <label for="productName" class="form-label">Ürün Adı</label>
+        <input type="text" asp-for="@Model.ProductName" class="form-control" id="productName" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="unitPrice" class="form-label">Fiyat</label>
+        <input type="text" asp-for="@Model.UnitPrice" class="form-control" id="unitPrice" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="categoryID" class="form-label">Kategori</label>
+        <input type="text" asp-for="@Model.CategoryID" class="form-control" id="categoryID" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-controller="CRUD" asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

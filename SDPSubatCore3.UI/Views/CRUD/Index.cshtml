@@ -1,0 +1,100 @@
+﻿@model List<Product>
+
+@{
+	int sayac = 1;
+}
+
+
+<table class="table table-striped table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th>#</th>
+			<th>İsim</th>
+			<th>Fiyat</th>
+			<th>Kategori</th>
+			<th>Düzenle</th>
+			<th>Detay</th>
+			<th>Sil</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td scope="row">@sayac</td>
+				<td>@item.ProductName</td>
+				<td>@item.UnitPrice</td>
+				<td>
+					@if (item.CategoryID == 1)
+					{
+						<span>Sebze</span>
+					}
+					else
+					{
+						<span>Meyve</span>
+					}
+				</td>
+				
+				<td>
+					<a href="@Url.Action("Duzenle", "CRUD", new { ID = item.ProductID })" class="btn btn-primary">Düzenle</a>
+				</td>
+				<td>
+					<a href="@Url.Action("Detay", "CRUD", new { ID = item.ProductID })" class="btn btn-info">Detay</a>
+				</td>
+				<td>
+					<a href="@Url.Action("Sil", "CRUD", new { ID = item.ProductID })" class="btn btn-danger">Sil</a>
+				</td>
+			</tr>
+			sayac++;
+		}
+	</tbody>
+</table>
+<br />
+<div class="d-grid gap-2 mt-4 d-flex justify-content-end">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	Ürün Ekle
+</button>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ürün Ekle</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form asp-action="Ekle" asp-controller="CRUD" method="post">
+					@Html.AntiForgeryToken()
+
+					<div class="mb-3">
+						<label for="productName" class="form-label">Ürün Adı</label>
+						<input type="text" name="productName" class="form-control" id="productName" required>
+						<div class="invalid-feedback">
+							Lütfen ürün adını giriniz.
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="unitPrice" class="form-label">Fiyat</label>
+						<input type="text" name="unitPrice" class="form-control" id="unitPrice" required>
+						<div class="invalid-feedback">
+							Lütfen fiyatı giriniz.
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="categoryID" class="form-label">Kategori</label>
+						<input type="text" name="categoryID" class="form-control" id="categoryID" required>
+						<div class="invalid-feedback">
+							Lütfen kategori ID'sini giriniz.
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Ekle</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
